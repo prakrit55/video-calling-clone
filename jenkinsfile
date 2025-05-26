@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'node' // Name must match one in Global Tool Configuration
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main',
+                    credentialsId: 'prakrit55',
+                    url: 'https://github.com/prakrit55/video-calling-clone.git'
+            }
+        }
+
+        stage('Check Node & NPM Version') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+            }
+        }
+        stage('Check the if the directories are present or not') {
+            steps {
+                // sh 'cd video-calling-clone'
+                sh 'ls -l'
+                sh 'cat package.json'
+            }
+    }
+}
+}
